@@ -3,32 +3,10 @@ const mongoose = require('mongoose');
 const Joi = require('Joi');
 const router = express.Router();
 const _ = require('underscore');
+const schemas = require('../Schemas/Account')
 
-mongoose.connect('mongodb+srv://salinaj2:Tota2011@apprepo.hjlsg.mongodb.net/CSE201?retryWrites=true&w=majorityy', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
-const Schema = mongoose.Schema;
-
-const Account = new Schema({
-    _id: String,
-    password: String,
-    userType: String
-},{
-  writeConcern: {
-    w:'majority',
-    j:true,
-    wtimeout: 1000
-}
-});
-
-const accountJoi = Joi.object({
-    _id: Joi.string().required(),
-    password: Joi.string().required(),
-    userType: Joi.string().optional()
-});
-
+const Account = schemas.accountSchema;
+const accountJoi = schemas.joiAccount;
 const accountModel = mongoose.model('Account', Account);
 
 router.get('/Users', async (req, res) => {

@@ -1,40 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Joi = require('Joi');
 const _ = require('underscore');
-
-mongoose.connect('mongodb+srv://salinaj2:Tota2011@apprepo.hjlsg.mongodb.net/CSE201?retryWrites=true&w=majorityy',{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-const Schema = mongoose.Schema;
-
-const formInfo = new Schema({
-    _id: String,
-    description: String,
-    organization: String,
-    platforms: [String],
-    versions: String,
-    link: String,
-    price: Number
-},{
-  writeConcern: {
-    w:'majority',
-    j:true,
-    wtimeout: 1000
-}
-});
-
-const appSchema = Joi.object({
-    _id: Joi.string().required(),
-    description: Joi.string().required(),
-    organization: Joi.string().required(),
-    platforms: Joi.array().items(Joi.string()).required(),
-    versions: Joi.string().required(),
-    link: Joi.string().required(),
-    price: Joi.number().required()
-});
+const schemas = require('../Schemas/App');
+const formInfo = schemas.appSchema;
+const appSchema = schemas.appJoi;
 
 const formModel = mongoose.model('AppForm',formInfo);
 
