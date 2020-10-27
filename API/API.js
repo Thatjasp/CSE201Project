@@ -4,12 +4,14 @@ const appRoute = require('./Routers/AppRoute.js');
 const AccountRoute = require('./Routers/AccountRoute.js');
 const formRoute = require('./Routers/AppForm.js');
 const site = express();
+const cors = require('cors');
 site.use(express.json());
 mongoose.connect('mongodb+srv://salinaj2:Tota2011@apprepo.hjlsg.mongodb.net/CSE201?retryWrites=true&w=majorityy',{
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-
+site.use(express.static('../'));
+site.use(cors());
 site.use('/Apps',appRoute);
 site.use('/Accounts',AccountRoute);
 site.use('/AppForms',formRoute);

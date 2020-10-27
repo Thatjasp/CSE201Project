@@ -3,8 +3,9 @@ const Joi = require('joi')
 
 const Schema = mongoose.Schema;
 module.exports.accountSchema = new Schema({
-    _id: String,
+    username: String,
     password: String,
+    _id:String,
     userType: String
 },{
   writeConcern: {
@@ -14,7 +15,8 @@ module.exports.accountSchema = new Schema({
 }
 });
 module.exports.joiAccount = Joi.object({
-    _id: Joi.string().required(),
+    username: Joi.string().required(),
     password: Joi.string().required(),
+    _id:Joi.string().required(),
     userType: Joi.string().optional()
 });
