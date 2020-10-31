@@ -9,7 +9,7 @@ test('Retrieves test form from datase', async () => {
         organization: "String",
         versions: "tring",
         link: "tring",
-        price: 3.22,
+        price: 3.22
     }]);
 });
 
@@ -23,13 +23,12 @@ test('Gets form information by name', async () => {
         versions: "tring",
         link: "tring",
         price: 3.22,
-        __v: 0
     });
 });
 
-test('Posts app onto the repo collection', async () => {
+test('Posts app onto the form collection', async () => {
     let app = {
-        _id: "Bob's App",
+        _id: "Bob'sApp",
         description: "Description test",
         organization: "The org",
         platforms: ['IOS 14.2', 'Androi 1.23'],
@@ -46,6 +45,6 @@ test('Basic update form function test', async () => {
     let updates = {
         description: "Another Test"
     }
-    const data = formFunctions.updateForm(updates);
+    const data = formFunctions.updateForm("String",updates);
     expect(data).toEqual(null);
 });

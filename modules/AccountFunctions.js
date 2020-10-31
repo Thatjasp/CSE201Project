@@ -1,4 +1,4 @@
-
+const fetch = require('node-fetch');
 const url = 'http://localhost:8080'
 
 /*
@@ -37,7 +37,10 @@ export async function getAccountByEmail(email) {
 export async function postForm(obj){
     return await fetch(url+'/Accounts/NewUser',{
         method: 'POST',
-        body: obj
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(obj)
     }).then(response =>{
         try{
             return response.json();
@@ -53,7 +56,10 @@ export async function postForm(obj){
 export async function updateForm(name,obj){
     return await fetch(`${url}/Accounts/User/${name}`,{
         method:'PUT',
-        body: obj
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(obj)
     }).then(response=>{
         try{
             return response.json();

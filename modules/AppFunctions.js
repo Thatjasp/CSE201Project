@@ -1,54 +1,74 @@
-
+const fetch = require('node-fetch');
 const url = 'http://localhost:8080'
 
 /*
     This method retrieves an array of App objects
     without filtering
 */
-export async function getApps() {
+async function getApps() {
     return await fetch(url + '/Apps/getApps').then((response) => {
-        try{
+        try {
             return response.json();
-        }
-        catch{
+        } catch {
             return response;
         }
     }).catch((err) => {
         return null;
     });
 }
+
+async function getApp(name) {
+    return await fetch(url + '/Apps/getApp/' + name).then((response) => {
+        try {
+            return response.json();
+        } catch {
+            return response;
+        }
+    }).catch((err) => {
+        return null;
+    });
+}
+
 /*
 
 
 */
-export async function postApps(obj){
-    return await fetch(url+'/Apps/sendApps',{
+async function postApps(obj) {
+    return await fetch(url + '/Apps/sendApps', {
         method: 'POST',
-        body: obj
-    }).then(response =>{
-        try{
+        headers: {
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify(obj)
+    }).then(response => {
+        try {
             return response.json();
-        }
-        catch{
+        } catch {
             return response;
         }
-    }).catch(err =>{
+    }).catch(err => {
         return null;
     });
 }
 
-export async function updateApp(name,obj){
-    return await fetch(`${url}/Apps/sendApps/${name}`,{
-        method:'PUT',
-        body: obj
-    }).then(response=>{
-        try{
+async function updateApp(name, obj) {
+    return await fetch(`${url}/Apps/sendApps/${name}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(obj)
+    }).then(response => {
+        try {
             return response.json();
-        }
-        catch{
+        } catch {
             return response;
         }
-    }).catch(err =>{
+    }).catch(err => {
         return null;
     });
 }
+module.exports.getApps = getApps;
+module.exports.getApp = getApp;
+module.exports.postApps = postApps;
+module.exports.updateApp = updateApp;

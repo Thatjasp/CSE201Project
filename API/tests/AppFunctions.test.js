@@ -29,6 +29,6 @@ test('Basic updateApp function test', async () => {
     let updates = {
         description:"Another Test"
     }
-    const data = appFunctions.updateApp(updates);
+    const data = appFunctions.updateApp("Test",updates);
     expect(data).toEqual(null);
 });

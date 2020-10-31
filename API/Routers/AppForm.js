@@ -20,6 +20,18 @@ router.get('/getForms', async (req,res) => {
     });
 });
 
+router.get('/getForm/:id', async (req, res) => {
+    await formModel.findById(req.params.id, (err,obj) => {
+        if(err){
+            return res.status(500).send();
+        }else if(!obj){
+            return res.status(404).send();
+        }else{
+            return res.send(obj);
+        }
+    });
+});
+
 router.post('/sendForms', async (req,res) => {
     let {error} = appSchema.validate(req.body);
     if (error){

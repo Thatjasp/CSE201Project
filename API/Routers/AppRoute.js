@@ -21,6 +21,17 @@ router.get('/getApps', async (req, res) => {
         }
     });
 });
+router.get('/getApp/:id', async (req, res) => {
+    await appModel.findById(req.params.id, (err,obj) => {
+        if(err){
+            return res.status(500).send();
+        }else if(!obj){
+            return res.status(404).send();
+        }else{
+            return res.send(obj);
+        }
+    });
+});
 
 router.post('/sendApps', async (req, res) => {
     let {error} = appSchema.validate(req.body);

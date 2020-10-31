@@ -1,11 +1,11 @@
-
+const fetch = require('node-fetch');
 const url = 'http://localhost:8080'
 
 /*
     This method retrieves an array of App objects
     without filtering
 */
-export async function getForms() {
+async function getForms() {
     return await fetch(url + '/AppForms/getForms').then((response) => {
         try{
             return response.json();
@@ -21,10 +21,24 @@ export async function getForms() {
 
 
 */
-export async function postForm(obj){
+async function getForm(name) {
+    return await fetch(url + '/AppForms/getForm/' + name).then((response) => {
+        try {
+            return response.json();
+        } catch {
+            return response;
+        }
+    }).catch((err) => {
+        return null;
+    });
+}
+async function postForm(obj){
     return await fetch(url+'/AppForms/sendForms',{
         method: 'POST',
-        body: obj
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(obj)
     }).then(response =>{
         try{
             return response.json();
@@ -37,10 +51,13 @@ export async function postForm(obj){
     });
 }
 
-export async function updateForm(name,obj){
+async function updateForm(name,obj){
     return await fetch(`${url}/AppForms/sendForms/${name}`,{
         method:'PUT',
-        body: obj
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(obj)
     }).then(response=>{
         try{
             return response.json();
@@ -52,3 +69,7 @@ export async function updateForm(name,obj){
         return null;
     });
 }
+module.exports.getForm = getForm;
+module.exports.getForms = getForms;
+module.exports.updateForm = updateForm;
+module.exports.postForm = postForm;
