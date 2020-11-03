@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 
 module.exports.appSchema = new Schema({
     _id: String,
+    nameApp: String,
     description: String,
     organization: String,
     platforms: [String],
@@ -22,10 +23,11 @@ module.exports.appSchema = new Schema({
 
 module.exports.appJoi = Joi.object({
     _id: Joi.string().require(),
-    description: Joi.string().required(),
-    organization: Joi.string().required(),
-    platforms: Joi.array().items(Joi.string()).required(),
-    versions: Joi.string().required(),
-    link: Joi.string().required(),
-    price: Joi.number().required()
+    nameApp: Joi.string().required(),
+    description: Joi.string().optional(),
+    organization: Joi.string().optional(),
+    platforms: Joi.array().items(Joi.string()).optional(),
+    versions: Joi.string().optional(),
+    link: Joi.string().optional(),
+    price: Joi.number().optional()
 });
