@@ -1,11 +1,10 @@
-const fetch = require('node-fetch');
 const url = 'http://localhost:8080'
 
 /*
     This method retrieves an array of App objects
     without filtering
 */
-async function getApps() {
+export async function getApps() {
     return await fetch(url + '/Apps/getApps').then((response) => {
         try {
             return response.json();
@@ -17,7 +16,7 @@ async function getApps() {
     });
 }
 
-async function getApp(name) {
+export async function getApp(name) {
     return await fetch(url + '/Apps/getApp/' + name).then((response) => {
         try {
             return response.json();
@@ -33,7 +32,7 @@ async function getApp(name) {
 
 
 */
-async function postApps(obj) {
+export async function postApps(obj) {
     return await fetch(url + '/Apps/sendApps', {
         method: 'POST',
         headers: {
@@ -51,7 +50,7 @@ async function postApps(obj) {
     });
 }
 
-async function updateApp(name, obj) {
+export async function updateApp(name, obj) {
     return await fetch(`${url}/Apps/sendApps/${name}`, {
         method: 'PUT',
         headers: {
@@ -68,7 +67,3 @@ async function updateApp(name, obj) {
         return null;
     });
 }
-module.exports.getApps = getApps;
-module.exports.getApp = getApp;
-module.exports.postApps = postApps;
-module.exports.updateApp = updateApp;

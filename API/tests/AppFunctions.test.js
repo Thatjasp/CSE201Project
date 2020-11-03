@@ -1,18 +1,21 @@
-let appFunctions = require('./modules/appFunctions.js');
+let appFunctions = require('../test-modules/testAppFunctions');
+let _ = require('underscore');
 
 test('Retrieves test app from datase',async () => {
     const arr = await appFunctions.getApps();
-    expect(arr).toEqual(null);
+    expect(Array.isArray(arr)).toBeTruthy();
+    if (arr.length != 0)
+        expect(_.isObject(arr[0])).toBeTruthy();
 });
 
 test('Gets app information by name', async () => {
-    const data = await appFunctions.getApp('test');
-    expect(data).toEqual(null);
+    const data = await appFunctions.getApp('Calorie Counter');
+    expect(_.isObject(data)).toBeTruthy();
 });
 
 test('Posts app onto the repo collection', async () => {
     let app = {
-        _id: "BobsApp",
+        _id: "Test",
         description: "Description test",
         organization: "The org",
         platforms: ['IOS 142','Androi 1.23'],
@@ -21,7 +24,8 @@ test('Posts app onto the repo collection', async () => {
         price: 2.99
     };
     const data = await appFunctions.postApps(app);
-    expect(data).toEqual(null);
+    
+    expect(_.isObject(data)).toBeTruthy();
 
 });
 
@@ -29,6 +33,7 @@ test('Basic updateApp function test', async () => {
     let updates = {
         description:"Another Test"
     }
-    const data = appFunctions.updateApp("Test",updates);
-    expect(data).toEqual(null);
+    appFunctions.updateApp("Test",updates);
+    const app = await appFunctions.getApp('Test');
+    expect(app.description).toEqual("Another Test");
 });

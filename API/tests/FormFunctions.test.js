@@ -1,29 +1,17 @@
-let formFunctions = require('./modules/formFunctions.js');
+let formFunctions = require('../test-modules/testFormsFunctions');
+const _ = require('underscore');
 
 test('Retrieves test form from datase', async () => {
     const arr = await formFunctions.getForms();
-    expect(arr).toEqual([{
-        _id: "String",
-        platforms: ["String"],
-        description: "String",
-        organization: "String",
-        versions: "tring",
-        link: "tring",
-        price: 3.22
-    }]);
+    expect(Array.isArray(arr)).toBeTruthy();
+    if (arr.length != 0)
+        expect(_.isObject(arr[0])).toBeTruthy();
+        
 });
 
 test('Gets form information by name', async () => {
     const data = await formFunctions.getForm('String');
-    expect(data).toEqual({
-        _id: "String",
-        platforms: ["String"],
-        description: "String",
-        organization: "String",
-        versions: "tring",
-        link: "tring",
-        price: 3.22,
-    });
+    expect(_.isObject(data)).toBeTruthy();
 });
 
 test('Posts app onto the form collection', async () => {
@@ -36,15 +24,17 @@ test('Posts app onto the form collection', async () => {
         link: "bob.com",
         price: 2.99
     };
-    const data = await formFunctions.postForm(app);
-    expect(data).toEqual(null);
-
+    await formFunctions.postForm(app);
+    const data = await formFunctions.getForm("Bob'sApp");
+    expect(_.isObject(data)).toBeTruthy();
 });
 
 test('Basic update form function test', async () => {
     let updates = {
-        description: "Another Test"
+        description: "Oooga Booga Booga"
     }
-    const data = formFunctions.updateForm("String",updates);
-    expect(data).toEqual(null);
+
+    await formFunctions.updateForm("String",updates);
+    const data = await formFunctions.getForm("String");
+    expect(data.description).toEqual("Oooga Booga Booga");
 });
