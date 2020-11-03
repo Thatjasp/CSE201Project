@@ -1,0 +1,33 @@
+<h1>Results List</h1>
+
+<div class="card card-body">
+    <h5 class="card-title"> Video Games List</h5>
+    <a class="btn btn-info" href="/">Home</a>
+    <br><a class="btn btn-info" href="/video_games-filter?sort=no_sort">Unsort</a>
+    <br><a class="btn btn-primary" href="/video_games-category_form">Category</a>
+    <br><a class="btn btn-primary" href="/video_games-developer_form">Developer</a>
+  
+</div>
+
+<form action="/video_games-filter" method="get">
+  
+<table class = "table table-striped table-bordered">
+    <tr>
+
+        <th><a href="/video_games-filter?sort=video_games_name{{name_order}}">Name</a><br><input type="text" class="form-control" name="video_games_name" id="video_games_name"><br><button type="submit">Submit</button></th>
+        <th><a href="/video_games-filter?sort=category_name{{name_order}}">Category</a><br><input type="text" class="form-control" name="category_name" id="category_name"><br><button type="submit">Submit</button></th>
+        <th><a href="/video_games-filter?sort=developer_name{{name_order}}">Developer</a><br><input type="text" class="form-control" name="developer_name" id="developer_name"><br><button type="submit">Submit</button></th>
+        <th><a href="/video_games-filter?sort=release_date{{name_order}}">Release Date</a><br><input type="text" class="form-control" name="release_date" id="release_date"><br><button type="submit">Submit</button></th>
+        <th>Functions</th>
+    </tr>
+    {{#each rows}}
+    <tr>
+        <td><a href="/video_games/pages/{{id}}">{{video_games_name}}</a></td>
+        <td>{{category_name}}</td>
+        <td>{{developer_name}}</td>
+        <td>{{release_date}}</td>
+        <td><a class="btn btn-primary" href="/video_games/edit/{{id}}">Edit</a><br><a class="btn btn-danger" method="delete" href="/video_games/delete/{{id}}">Delete</a></td>
+    </tr>
+    {{/each}}
+    </table>
+</form>
