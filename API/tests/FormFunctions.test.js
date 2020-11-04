@@ -17,6 +17,7 @@ test('Gets form information by name', async () => {
 test('Posts app onto the form collection', async () => {
     let app = {
         _id: "Bob'sApp",
+        nameApp: "Bob'saapp",
         description: "Description test",
         organization: "The org",
         platforms: ['IOS 14.2', 'Androi 1.23'],

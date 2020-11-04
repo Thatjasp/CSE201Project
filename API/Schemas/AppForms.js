@@ -22,12 +22,12 @@ module.exports.appSchema = new Schema({
 });
 
 module.exports.appJoi = Joi.object({
-    _id: Joi.string().require(),
-    nameApp: Joi.string().required(),
+    _id: Joi.string().required(),
+    nameApp: Joi.string().optional(),
     description: Joi.string().optional(),
     organization: Joi.string().optional(),
-    platforms: Joi.array().items(Joi.string()).optional(),
+    platforms: Joi.array().items(Joi.string().optional()),
     versions: Joi.string().optional(),
-    link: Joi.string().optional(),
+    link: Joi.string().required(),
     price: Joi.number().optional()
 });

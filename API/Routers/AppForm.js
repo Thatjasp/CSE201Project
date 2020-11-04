@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const _ = require('underscore');
-const schemas = require('../Schemas/App');
+const schemas = require('../Schemas/AppForms');
 const formInfo = schemas.appSchema;
 const appSchema = schemas.appJoi;
 
