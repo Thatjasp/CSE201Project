@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>  </title>
     <style>
+
       body{
         background-color: #343434;
         color: white;
@@ -336,62 +337,8 @@
       .toForm a{
         color: aliceblue;
       }
-      
-      .submit-button:hover{
-        background-color: #3795E5;
-      }
 
       /* END OF FILTERS */
-      
-
-      h1{
-        text-align: center;
-      }
-
-      section{
-        border-radius: 5px;
-        background-color: #575757;
-        padding: 20px;
-        margin-left: 50px;
-        margin-right: 50px;
-      }
-      fieldset{
-        border: 0px;
-      }
-      .form input{
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0px;
-        display: block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-      }
-      .formEnterBtn{
-        background-color: #3ea6ff;
-        color: white;
-        font-size: 14px;
-        padding: 5px;
-        padding-left: 15px;
-        padding-right: 15px;
-
-
-        -webkit-border-top-left-radius: 5px;
-        -webkit-border-top-right-radius: 5px;
-        -webkit-border-bottom-left-radius:5px;
-        -webkit-border-bottom-right-radius:5px;
-        -moz-border-radius-topleft: 5px;
-        -moz-border-radius-topright: 5px;
-        -moz-border-radius-bottomleft: 5px;
-        -moz-border-radius-bottomright: 5px;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-      }
-      .formEnterBtn:hover{
-        background-color: #3795E5;
-      }
 
     </style>
   </head>
@@ -482,51 +429,8 @@
       <p> Can't find what you are looking for? <a href="AppRequestForm.html"> Add it! </a> </p>
     </div>
 
-    <!-- Form for users to request apps to be added to the collection -->
-    <div class="form">
-      <h1> App Request Form </h1>
-      <section>
-        <form name="appRequestForm" action="ThankYou.html" onSubmit="" method="POST">
-
-          <fieldset name="appRquestForm" id="appRequestForm">
-            <label for="username"> Username (required): </label>
-            <input type="text" name="username" id="username" placeholder="Name of User" required/>
-            <br>
-
-            <label for="appLink"> Link to the origanl app store (required): </label>
-            <input type="text" name="appLink" id="appLink" placeholder="Link" required/>
-            <br>
-
-            <label for="appName"> Name of app (optional): </label>
-            <input type="text" name="appName" id="appName" placeholder="Name"/>
-            <br>
-
-            <label for="appPrice"> Price of app (optional): </label>
-            <input type="text" name="appPrice" id="appPrice" placeholder="0.99"/>
-            <br>
-
-            <label for="platforms"> Platform(s) (optional): </label>
-            <input type="text" name="platforms" id="platforms" placeholder="Platform name(s)"/>
-            <br>
-
-            <label for="appVersion"> Current Version (optional): </label>
-            <input type="text" name="appVersion" id="appVersion" placeholder="Current Version Number"/>
-            <br>
-
-            <label for="appDescription"> Current Description on App Store (optional): </label>
-            <input type="text" name="appDescription" id="appDescription" placeholder="Current Description"/>
-            <br>
-
-          </fieldset>
-
-          <button class="formEnterBtn"> Enter </button>
-
-        </form>
-      </section>
-    </div>
-
     <script>
-      
+
       // Get the modal
       var modal = document.getElementById('id01');
 
@@ -536,32 +440,6 @@
               modal.style.display = "none";
           }
       }
-      
-      function storeInformation() {
-
-      }
-
-      // Get information from the form
-      let username = document.forms["appRequestForm"]["username"].value;
-      let appLink = document.getElementById("appLink").innerHTML;
-      let appName = document.getElementById("appName").innerHTML;
-      let appPrice = document.getElementById("appPrice").innerHTML;
-      let platforms = document.getElementById("platforms").innerHTML;
-      let appVersion = document.getElementById("appVersion").value;
-      let appDescription = document.getElementById("appDescription").value;
-
-      // app request form object
-      let request = {
-        requestUsername: username,
-        requestAppLink: appLink,
-        requestAppName: appName,
-        requestAppPrice: appPrice,
-        requestPlatforms: platforms,
-        requestVersion: appVersion,
-        requestDescription: appDescription
-      }
-
-      console.log(request);
 
     </script>
 
