@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>  </title>
     <style>
+
       body{
         background-color: #343434;
         color: white;
@@ -336,46 +337,23 @@
       .toForm a{
         color: aliceblue;
       }
-      
-      .submit-button:hover{
-        background-color: #3795E5;
-      }
 
       /* END OF FILTERS */
-      
 
-      h1{
+
+      /* -- START OF PENDING APPS -- */
+      #queueTitle{
         text-align: center;
       }
-
-      section{
-        border-radius: 5px;
-        background-color: #575757;
-        padding: 20px;
-        margin-left: 50px;
-        margin-right: 50px;
-      }
-      fieldset{
-        border: 0px;
-      }
-      .form input{
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0px;
+      .pendingApps{
+        background-color: #5d5d5d;
+        margin-left: 60px;
+        margin-right: 60px;
         display: block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-      }
-      .formEnterBtn{
-        background-color: #3ea6ff;
-        color: white;
-        font-size: 14px;
-        padding: 5px;
-        padding-left: 15px;
-        padding-right: 15px;
-
-
+        /*border: 1px solid white;*/
+        margin-top: 50px;
+        padding: 1px 10px 20px 10px;
+        
         -webkit-border-top-left-radius: 5px;
         -webkit-border-top-right-radius: 5px;
         -webkit-border-bottom-left-radius:5px;
@@ -389,9 +367,61 @@
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
       }
-      .formEnterBtn:hover{
-        background-color: #3795E5;
+      .pendingApps button{
+        border: 2px solid black;
+        background-color: white;
+        color: black;
+        /*margin: 10px 3px;*/
+        margin-right: 6px;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        float: right;
+        
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-bottom-left-radius:5px;
+        -webkit-border-bottom-right-radius:5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-topright: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
       }
+      .pendingApps button.approve{
+        border-color: #4CAF50;
+        color: green;
+      }
+      .pendingApps button.approve:hover{
+        background-color: #4CAF50;
+        color: white;
+      }
+      .pendingApps button.deny{
+        border-color: #f44336;
+        color: red;
+        padding: 10px 17px;
+      }
+      .pendingApps button.deny:hover{
+        background: #f44336;
+        color: white;
+      }
+      .queue input{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0px;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      fieldset{
+        border: 0px;
+      }
+
+      /* -- END OF PENDING APPS -- */
 
     </style>
   </head>
@@ -482,50 +512,99 @@
       <p> Can't find what you are looking for? <a href="AppRequestForm.html"> Add it! </a> </p>
     </div>
 
-    <!-- Form for users to request apps to be added to the collection -->
-    <div class="form">
-      <h1> App Request Form </h1>
-      <section>
-        <form name="appRequestForm" action="ThankYou.html" onSubmit="" method="POST">
+    <!-- START OF PENDING APPS -->
+    <div class="queue">
+      <h1 id="queueTitle"> Current Pending Queue </h1>
+      <div class="pendingApps">
+        <section>
+          <form method="POST" onsubmit="return(storeInformation())" target="_blank" action="ThankYou - Version 1.0 - Just Centered Text.html" autocomplete="off">
+            
+            <button class="approve"> <i class="fa fa-check"></i> </button>
+            <button class="deny"> <i class="fa fa-remove"></i> </button>
+            <h3> Request Object (placeholders show the user-entered info) </h3>
+            
+            <fieldset name="appRquestForm" id="appRequestForm">
+              <label for="username"> Username: </label>
+              <input type="text" name="username" id="username" value="requestUsername" required/>
+              <br>
 
-          <fieldset name="appRquestForm" id="appRequestForm">
-            <label for="username"> Username (required): </label>
-            <input type="text" name="username" id="username" placeholder="Name of User" required/>
-            <br>
+              <label for="appLink"> Link to the origanl app store: </label>
+              <input type="text" name="appLink" id="appLink" value="requestAppLink" required/>
+              <br>
 
-            <label for="appLink"> Link to the origanl app store (required): </label>
-            <input type="text" name="appLink" id="appLink" placeholder="Link" required/>
-            <br>
+              <label for="appName"> Name of app: </label>
+              <input type="text" name="appName" id="appName" value="requestAppName" required/>
+              <br>
 
-            <label for="appName"> Name of app (optional): </label>
-            <input type="text" name="appName" id="appName" placeholder="Name"/>
-            <br>
+              <label for="appPrice"> Price of app: </label>
+              <input type="text" name="appPrice" id="appPrice" value="requestAppPrice" required/>
+              <br>
 
-            <label for="appPrice"> Price of app (optional): </label>
-            <input type="text" name="appPrice" id="appPrice" placeholder="0.99"/>
-            <br>
+              <label for="platforms"> Platform(s): </label>
+              <input type="text" name="platforms" id="platforms" value="requestPlatforms" required/>
+              <br>
 
-            <label for="platforms"> Platform(s) (optional): </label>
-            <input type="text" name="platforms" id="platforms" placeholder="Platform name(s)"/>
-            <br>
+              <label for="appVersion"> Current Version: </label>
+              <input type="text" name="appVersion" id="appVersion" value="requestVersion" required/>
+              <br>
 
-            <label for="appVersion"> Current Version (optional): </label>
-            <input type="text" name="appVersion" id="appVersion" placeholder="Current Version Number"/>
-            <br>
+              <label for="appDescription"> Current Description on App Store: </label>
+              <input type="text" name="appDescription" id="appDescription" value="requestDescription" required/>
+              <br>
+            </fieldset>
 
-            <label for="appDescription"> Current Description on App Store (optional): </label>
-            <input type="text" name="appDescription" id="appDescription" placeholder="Current Description"/>
-            <br>
+          </form>
+        </section>
+      </div>
+      
+      <br>
+      
+      <div class="pendingApps">
+        <section>
+          <form>
+            
+            <button class="approve"> <i class="fa fa-check"></i> </button>
+            <button class="deny"> <i class="fa fa-remove"></i> </button>
+            <h3> Request Object (placeholders show the user-entered info) </h3>
+            
+            <fieldset name="appRquestForm" id="appRequestForm">
+              <label for="username"> Username: </label>
+              <input type="text" name="username" id="username" value=requestUsername required/>
+              <br>
 
-          </fieldset>
+              <label for="appLink"> Link to the origanl app store: </label>
+              <input type="text" name="appLink" id="appLink" value=requestAppLink required/>
+              <br>
 
-          <button class="formEnterBtn"> Enter </button>
+              <label for="appName"> Name of app: </label>
+              <input type="text" name="appName" id="appName" value=requestAppName required/>
+              <br>
 
-        </form>
-      </section>
+              <label for="appPrice"> Price of app: </label>
+              <input type="text" name="appPrice" id="appPrice" value=requestAppPrice required/>
+              <br>
+
+              <label for="platforms"> Platform(s): </label>
+              <input type="text" name="platforms" id="platforms" value=requestPlatforms required/>
+              <br>
+
+              <label for="appVersion"> Current Version: </label>
+              <input type="text" name="appVersion" id="appVersion" value=requestVersion required/>
+              <br>
+
+              <label for="appDescription"> Current Description on App Store: </label>
+              <input type="text" name="appDescription" id="appDescription" value=requestDescription required/>
+              <br>
+            </fieldset>
+
+          </form>
+        </section>
+      </div>
     </div>
 
+
     <script>
+      
       
       // Get the modal
       var modal = document.getElementById('id01');
@@ -538,30 +617,43 @@
       }
       
       function storeInformation() {
-
+        // Tesing if the values change in the HTML
+        let username = document.write(document.getElementById("username").value);
+        //setAttribute("username", (document.getElementById("username")))
+        let appLink = document.write(document.getElementById("appLink").value);
+        let appName = document.getElementById("appName").value;
+        let appPrice = document.getElementById("appPrice").value;
+        let platforms = document.getElementById("platforms").value;
+        let appVersion = document.getElementById("appVersion").value;
+        let appDescription = document.getElementById("appDescription").value;
       }
 
       // Get information from the form
-      let username = document.forms["appRequestForm"]["username"].value;
+/*      let username = document.forms["appRequestForm"]["username"].value;
       let appLink = document.getElementById("appLink").innerHTML;
       let appName = document.getElementById("appName").innerHTML;
       let appPrice = document.getElementById("appPrice").innerHTML;
       let platforms = document.getElementById("platforms").innerHTML;
       let appVersion = document.getElementById("appVersion").value;
-      let appDescription = document.getElementById("appDescription").value;
+      let appDescription = document.getElementById("appDescription").value;*/
+      
 
-      // app request form object
-      let request = {
-        requestUsername: username,
-        requestAppLink: appLink,
-        requestAppName: appName,
-        requestAppPrice: appPrice,
-        requestPlatforms: platforms,
-        requestVersion: appVersion,
-        requestDescription: appDescription
+      // Information from the request form page (app request form object)
+      let appInfo = {
+        requestUsername: "",
+        requestAppLink: "",
+        requestAppName: "",
+        requestAppPrice: 0.9,
+        requestPlatforms: "",
+        requestVersion: "",
+        requestDescription: ""
+      }
+      
+      function submitApp(request) {
+
       }
 
-      console.log(request);
+      console.log(appInfo);
 
     </script>
 
