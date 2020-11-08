@@ -68,3 +68,16 @@ export async function updateForm(name,obj){
         return null;
     });
 }
+export async function deleteForm(name) {
+    return await fetch(url + '/AppForms/deleteForm/' + name,{
+        method:'DELETE'
+    }).then((response) => {
+        try {
+            return response.json();
+        } catch {
+            return response;
+        }
+    }).catch((err) => {
+        return null;
+    });
+}

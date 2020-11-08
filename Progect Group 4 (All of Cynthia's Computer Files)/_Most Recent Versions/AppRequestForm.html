@@ -546,7 +546,7 @@
     <div class="form">
       <h1>App Request Form</h1>
       <section>
-        <form name="appRequestForm" onSubmit="enter()" aync>
+        <form name="appRequestForm" onSubmit="enter()" >
           <fieldset name="appRquestForm" id="appRequestForm">
             <label for="username"> Username (required): </label>
             <input
@@ -669,7 +669,6 @@
           description: appDescription,
         };
 
-        var b = await postForm(request);
         console.log(b);
       }
     </script>
