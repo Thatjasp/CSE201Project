@@ -565,10 +565,12 @@
     </div>
 
     <script>
-        var forms = await getForms();
+       var url = "http://localhost:8080";
+        var forms;
         window.onload = async () => {
+          forms = await getForms();
           for (var i = 0; i < forms.length; i++) {
-            var div = buildDiv();
+            var div = buildDiv(i);
             console.log(div);
             div.setAttribute("id", i);
             objWithDiv(forms[i], div);
@@ -576,9 +578,8 @@
           }
         };
 
-        var url = "http://localhost:8080";
         async function getForms() {
-          return await fetch(url + "/AppForms/getForms")
+          return fetch(url + "/AppForms/getForms")
             .then((response) => {
               try {
                 return response.json();
@@ -591,16 +592,16 @@
             });
         }
 
-        function buildDiv() {
+        function buildDiv(num) {
           var pendingApp = document.createElement("div");
           pendingApp.setAttribute("class", "pendingApps");
 
           var approveButton = document.createElement("button");
           approveButton.setAttribute("class", "approve");
-          approveButton.setAttribute("onclick", "acceptForm()");
+          approveButton.setAttribute("onclick", `acceptForm(${num})`);
 
           var denyButton = document.createElement("button");
-          denyButton.setAttribute("onclick", "denyForm()");
+          denyButton.setAttribute("onclick", `denyForm(${num})`);
           denyButton.setAttribute("class", "deny");
 
           var approveI = document.createElement("i");
@@ -616,25 +617,25 @@
         }
 
         function objWithDiv(obj, div) {
-          console.log(obj);
           var userName = document.createElement("h1");
-          userName.innerHTML = obj._id;
+          userName.innerHTML = "Username: " + obj._id;
           var appName = document.createElement("h3");
-          appName.innerHTML = obj.nameApp;
+          appName.innerHTML = "App name: " + obj.nameApp;
           var description = document.createElement("h3");
-          description.innerHTML = obj.description;
+          description.innerHTML = "Description: " + obj.description;
           var organization = document.createElement("h3");
-          organization.innerHTML = obj.organization;
+          organization.innerHTML = "Organization: " + obj.organization;
           var platforms = document.createElement("h3");
+          platforms.innerHTML = "Platforms: "
           for (var i = 0; i < obj.platforms.length; i++) {
             platforms.innerHTML += obj.platforms[i] + " ";
           }
           var versions = document.createElement("h3");
-          versions.innerHTML = obj.versions;
+          versions.innerHTML = "Version: " + obj.versions;
           var link = document.createElement("h3");
-          link.innerHTML = obj.link;
+          link.innerHTML = "Link: " + obj.link;
           var price = document.createElement("h3");
-          price.innerHTML = obj.price;
+          price.innerHTML = "Price: " + obj.price;
 
           div.appendChild(userName);
           div.appendChild(appName);
@@ -646,12 +647,13 @@
           div.appendChild(price);
         }
 
-        function acceptForm(div) {
-          var num = parseInt(div.id);
-          var obj = form[num];
+        async function acceptForm(id) {
+          var num = parseInt(id);
+          var obj = forms[num];
           var appObj = formToApp(obj);
+          console.log(appObj);
           try {
-            JSON.parse(postApps(appObj));
+            postApps(appObj);
             deleteForm(obj._id);
             }
             catch{console.log("PROBLEM ADDING APP")}
@@ -670,8 +672,20 @@
       }).catch((err) => {
           return null;
       });
+    }
 
-
+    function formToApp(obj){
+      var newObj = {
+        _id:obj.nameApp,
+        description: obj.description,
+        organization: obj.organization,
+        platforms:obj.platforms,
+        versions: obj.versions,
+        link: obj.link,
+        price: obj.price
+      }
+      return newObj;
+    }
         async function postApps(obj) {
           return await fetch(url + "/Apps/sendApps", {
             method: "POST",

@@ -1,3 +1,4 @@
+
 const url = 'http://localhost:8080';
 var jsonIndex = 0;
 window.onload = function (){
@@ -6,8 +7,13 @@ window.onload = function (){
             console.log(data);
             return;
         }
-        var cards = document.getElementsByClassName('appCard');
-        console.log(data[jsonIndex]);
+        putInfoCards(data);
+        
+});
+}
+function putInfoCards(data){
+    var cards = document.getElementsByClassName('appCard');
+        
         for (var i = 0; i < cards.length; i++ ) {
             var children = cards[i].children;
             clearAndAddText(children[1],data[jsonIndex]._id);
@@ -19,15 +25,18 @@ window.onload = function (){
             clearAndAddText(children[6],data[jsonIndex].description);
             jsonIndex++;
         }
-});
-    
+}
+function nextPage(){
+    getApps().then((data) => {
+        putInfoCards(data);
+    });
 }
 function addingPlatform (data){
     var platforms = data.platforms;
     var platformStr = "Platforms: ";
     for(var j = 0; j < platforms.length; j++) 
         platformStr += platforms[j] + " ";
-    return platformStr
+    return platformStr;
 }
 
 function clearAndAddText(element,data){

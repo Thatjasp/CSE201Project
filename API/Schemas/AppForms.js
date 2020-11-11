@@ -23,11 +23,11 @@ module.exports.appSchema = new Schema({
 
 module.exports.appJoi = Joi.object({
     _id: Joi.string().required(),
-    nameApp: Joi.string().optional(),
-    description: Joi.string().optional(),
-    organization: Joi.string().optional(),
-    platforms: Joi.array().items(Joi.string().optional()),
-    versions: Joi.string().optional(),
+    nameApp: Joi.string().allow('').optional(),
+    description: Joi.string().allow('').optional(),
+    organization: Joi.string().allow('').optional(),
+    platforms: Joi.array().empty(['']).default([]).items(Joi.string().allow('').optional()),
+    versions: Joi.string().allow('').optional(),
     link: Joi.string().required(),
-    price: Joi.number().optional()
+    price: Joi.number().empty(NaN).default(0).optional()
 });

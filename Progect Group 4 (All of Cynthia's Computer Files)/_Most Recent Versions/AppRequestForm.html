@@ -611,6 +611,16 @@
               placeholder="Current Description"
             />
             <br />
+             <label for="appOrganization">
+              Current Organization on App Store (optional):
+            </label>
+            <input
+              type="text"
+              name="appOrganizationDescription"
+              id="appOrganization"
+              placeholder="Current Organization"
+            />
+            <br />
           </fieldset>
 
           <button class="formEnterBtn">Enter</button>
@@ -651,25 +661,32 @@
       async function enter() {
         // Get information from the form
         let username = document.forms["appRequestForm"]["username"].value;
-        let appLink = document.getElementById("appLink").innerHTML;
-        let appName = document.getElementById("appName").innerHTML;
-        let appPrice = document.getElementById("appPrice").innerHTML;
-        let platforms = document.getElementById("platforms").innerHTML;
+        let appLink = document.getElementById("appLink").value;
+        let appName = document.getElementById("appName").value;
+        let appPrice = document.getElementById("appPrice").value;
+        let platforms = [document.getElementById("platforms").value];
         let appVersion = document.getElementById("appVersion").value;
         let appDescription = document.getElementById("appDescription").value;
-
+        let appOrganization = document.getElementById("appOrganization").value;
+        
+        console.log(typeof(appName));
+        if (appPrice != "")
+          appPrice = parseInt(price);
+        else
+          appPrice = 0;
         // app request form object
         let request = {
           _id: username,
           link: appLink,
-          appName: appName,
-          price: parseInt(appPrice),
-          platforms: [platforms],
+          nameApp: appName,
+          price: appPrice,
+          platforms: platforms,
           versions: appVersion,
           description: appDescription,
+          orgaization: appOrganization
         };
-
-        console.log(b);
+        console.log(request);
+        console.log(await postForm(request));
       }
     </script>
   </body>

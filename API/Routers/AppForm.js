@@ -66,7 +66,7 @@ router.put('/sendForms/:id', async (req,res) => {
 });
 router.delete('/deleteForm/:id', async (req,res) => {
     formModel.findByIdAndRemove(req.params.id,(err,obj) => {
-        if(error)
+        if(err)
             return res.status(500).send("Error Creating Object");
         else
             return res.send('Deleted Sucessfully');
