@@ -456,7 +456,7 @@
 
   <body>
     <div class="topnav">
-      <a id="logo" href="index.html">
+      <a id="logo" href="MetaAppIndex.html">
         <img
           href="AppPage.html"
           src="img/BluBerry Pi.png"
@@ -693,9 +693,9 @@
         async function denyForm(id){
           var num = parseInt(id);
           var obj = forms[num];
-          var appObj = formToApp(obj);
+          console.log(obj);
           try{
-            deleteForm(obj.id);
+            await deleteForm(obj.id);
             location.reload();
           }
           catch{console.log("PROBLEM ADDING APP")}

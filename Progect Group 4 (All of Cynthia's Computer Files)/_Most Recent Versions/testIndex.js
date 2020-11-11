@@ -12,17 +12,19 @@ window.onload = function (){
 });
 }
 function putInfoCards(data){
-    var cards = document.getElementsByClassName('appCard');
+    var repo = document.getElementById('appRepo');
         
-        for (var i = 0; i < cards.length; i++ ) {
-            var children = cards[i].children;
-            clearAndAddText(children[1],data[jsonIndex]._id);
-            clearAndAddText(children[2],data[jsonIndex].organization);
+        for (var i = 0; i < data.length; i++ ) {
+            var div = createDiv();
+            var children = div.children;
+            clearAndAddText(children[0],data[jsonIndex]._id);
+            clearAndAddText(children[1],data[jsonIndex].organization);
             var platStr = addingPlatform(data[jsonIndex]);
-            clearAndAddText(children[3],platStr);
-            clearAndAddText(children[4],data[jsonIndex].versions);
-            clearAndAddText(children[5],data[jsonIndex].price);
-            clearAndAddText(children[6],data[jsonIndex].description);
+            clearAndAddText(children[2],platStr);
+            clearAndAddText(children[3],data[jsonIndex].versions);
+            clearAndAddText(children[4],data[jsonIndex].price);
+            clearAndAddText(children[5],data[jsonIndex].description);
+            repo.appendChild(div);
             jsonIndex++;
         }
 }
@@ -58,4 +60,23 @@ async function getApps() {
     }).catch((err) => {
         return null;
     });
+}
+
+
+function createDiv() {
+    var appCard = document.createElement('div');
+    appCard.setAttribute('class','appCard');
+    var h3 = document.createElement('h3');
+    var p1 = document.createElement('p');
+    var p2 = document.createElement('p');
+    var p3 = document.createElement('p');
+    var p4 = document.createElement('p');
+    var p5 = document.createElement('p');
+
+    var arr = [h3,p1,p2,p3,p4,p5];
+
+    for (var i = 0; i < arr.length; i++){
+        appCard.appendChild(arr[i]);
+    }
+    return appCard;
 }
