@@ -423,6 +423,32 @@
         background: #f44336;
         color: white;
       }
+    .queue input{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0px;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      fieldset{
+        border: 0px;
+      }
+
+      /* -- END OF PENDING APPS -- *
+    /* -- START OF THE FOOTER --*/
+			.footer{
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				color: white;
+				text-align: center;
+				margin-top: 40px;
+				padding: 10px 0px 10px 0px;
+			}
+			/* -- END OF THE FOOTER -- */
+
 
       /* -- END OF PENDING APPS -- */
     </style>
@@ -563,7 +589,12 @@
     <div class="queue" id="q">
       <h1 id="queueTitle">Current Pending Queue</h1>
     </div>
-
+    <!-- START OF FOOTER 	-->
+		<div class="footer">
+			<p> *This was made as a CSE 201 Into to Software Engineering project* </p>
+			<p> By Jose Salinas, Cynthia Sheard, and Dane Federighi</p>
+		</div>
+		<!-- END OF FOOTER -->
     <script>
        var url = "http://localhost:8080";
         var forms;
@@ -658,7 +689,15 @@
             }
             catch{console.log("PROBLEM ADDING APP")}
           }
-        
+        async function denyForm(id){
+          var num = parseInt(id);
+          var obj = forms[num];
+          var appObj = formToApp(obj);
+          try{
+            deleteForm(obj.id);
+          }
+          catch{console.log("PROBLEM ADDING APP")}
+        }
         
       async function deleteForm(name) {
         return await fetch(url + '/AppForms/deleteForm/' + name,{
@@ -672,6 +711,7 @@
       }).catch((err) => {
           return null;
       });
+      location.reload();
     }
 
     function formToApp(obj){

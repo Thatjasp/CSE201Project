@@ -1,10 +1,44 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@cesheard 
+Learn Git and GitHub without any code!
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+
+
+Thatjasp
+/
+CSE201Project
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+CSE201Project/Progect Group 4 (All of Cynthia's Computer Files)/_Most Recent Versions/MetaAppIndex.html
+@Thatjasp
+Thatjasp New App Form schema and new folder for test-modules
+Latest commit c7c2cf0 4 minutes ago
+ History
+ 1 contributor
+532 lines (448 sloc)  15.4 KB
+  
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title> MetaAppIndex - Version 3.1 - Trying to Fix Login Popup </title>
+        <title>  </title>
         <style>
           
           body{
@@ -17,6 +51,14 @@
           /* Add a black background color to the top navigation bar */
           .topnav {
             overflow: hidden;
+            background-color: #5d5d5d;
+          }
+          
+          .topnav #logo{
+            padding: 0px;
+          }
+          
+          .topnav #logo:hover{
             background-color: #5d5d5d;
           }
 
@@ -48,34 +90,20 @@
           }
           
           /* Style the search box inside the navigation bar */
-          .topnav input[type=text] {
+          .topnav .search-container input[type=text] {
+            float: none;
             padding: 6px;
-            margin-top: 8px;
-            /*margin-right: 16px; */
-            font-size: 17px;
             border: none;
-          }
-          
-          .topnav .search-container #userIcon{
-            float: right;
-            padding: 6px 10px;
             margin-top: 8px;
             margin-right: 16px;
-            background: #ddd;
             font-size: 17px;
-            border: none;
-            cursor: pointer;
-          }
-          
-          .topnav .search-container #userIcon:hover{
-            background: #ccc;
           }
           
           @media screen and (max-width: 600px) {
             .topnav .search-container {
               float: none;
             }
-            .topnav a, .topnav input[type=text], .topnav .search-container #userIcon {
+            .topnav a, .topnav input[type=text], .topnav .search-container .loginButton {
               float: none;
               display: block;
               text-align: left;
@@ -88,23 +116,11 @@
             }
           }
           
-          /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
-          @media screen and (max-width: 600px) {
-            .topnav a, .topnav input[type=text] {
-              float: none;
-              display: block;
-              text-align: left;
-              width: 100%;
-              margin: 0;
-              padding: 14px;
-            }
-            .topnav input[type=text] {
-              border: 1px solid #ccc;
-            }
-          }
+          
+              /* -- START OF W3 LOG-IN STUFF -- */
           
           /* Full-width input fields */
-          input[type=text], input[type=password] {
+          .modal input[type=text], input[type=password] {
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -114,18 +130,45 @@
           }
 
           /* Set a style for all buttons */
-          #userLogin {
-            background-color: #4CAF50;
+          .loginButton {
+            background-color: #5d5d5d;
             color: white;
             padding: 14px 20px;
             margin: 8px 0;
             border: none;
             cursor: pointer;
             width: 100%;
+            
+            float: right;
+            
+            -webkit-border-top-left-radius: 5px;
+            -webkit-border-top-right-radius: 5px;
+            -webkit-border-bottom-left-radius:5px;
+            -webkit-border-bottom-right-radius:5px;
+            -moz-border-radius-topleft: 5px;
+            -moz-border-radius-topright: 5px;
+            -moz-border-radius-bottomleft: 5px;
+            -moz-border-radius-bottomright: 5px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
           }
 
-          #userLogin:hover {
+          .loginButton:hover {
             opacity: 0.8;
+          }
+          
+          .sideNav{
+            display: block;
+            float: right;
+          }
+          .sideNav a{
+            color: white;
+            text-decoration-line: none;
+          }
+          .sideNav a:hover{
+            color: cornflowerblue;
           }
 
           /* Extra styles for the cancel button */
@@ -170,12 +213,20 @@
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
             padding-top: 60px;
           }
+          
+          .modal a{
+            color: white;
+          }
+          
+          .modal a:hover{
+            color: cornflowerblue;
+          }
 
           /* Modal Content/Box */
           .modal-content {
-            background-color: #fefefe;
+            background-color: #343434;
             margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
+            border: 1px solid #343434;
             width: 80%; /* Could be more or less, depending on screen size */
           }
 
@@ -221,8 +272,11 @@
                width: 100%;
             }
           }
+              /* -- END OF W3 LOG-IN STUFF -- */
           
           /* END OF TOP NAV */
+          
+          
           
           /* START OF FILTERS */
           .filters{
@@ -372,26 +426,32 @@
           }
           
         </style>
+        <script src='testIndex.js'></script>
     </head>
 
     <body>
         
       <div class="topnav">
-        <img src="img/BluBerry Pi.png" height="44px" width="62px">
+        <a id="logo" href="index.html"> <img href="AppPage.html" src="img/BluBerry Pi.png" height="44px" width="62px"> </a>
         <div class="search-container">
-          <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search">
-            <button id="userIcon" type="submit"> <i class="fa fa-search"></i> </button>
+          <form>
+            <input type="text" placeholder="Search..">
+            
           </form>
         </div>
       </div>
       
-      <button id="userLogin" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+      <div class="sideNav">
+        <button class="loginButton" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"> <i class="fa fa-user"></i> </button>
+        <br>
+        <a href=""> Pending <br> Requests </a>
+      </div>
+      
       <div id="id01" class="modal">
         <form class="modal-content animate" action="/action_page.php" method="post">
           <div class="imgcontainer">
             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <img src="img_avatar2.png" alt="Avatar" class="avatar">
+            <img src="img/user_icon_circle.png" alt="Avatar" class="avatar">
           </div>
 
           <div class="container">
@@ -401,13 +461,13 @@
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required>
 
-            <button type="submit">Login</button>
+            <button class="loginButton" type="submit">Login</button>
             <label>
               <input type="checkbox" checked="checked" name="remember"> Remember me
             </label>
           </div>
 
-          <div class="container" style="background-color:#f1f1f1">
+          <div class="container" style="background-color:#343434">
             <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
             <span class="psw">Forgot <a href="#">password?</a></span>
           </div>
@@ -458,32 +518,32 @@
       <div>
         <div class="appCard">
           <img src="img/result1.png" class="appCardImage"/>
-          <h3> App Name </h3>
-          <p> Organization: String = null </p>
-          <p> Platform(s): String = null </p>
-          <p> Version: ?? </p>
-          <p> Price: Double 0.0 </p>
-          <p> Description: String = null </p>
+          <h3></h3>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
         </div>
 
         <div class="appCard">
           <img src="img/result1.png" class="appCardImage"/>
-          <h3> App Name </h3>
-          <p> Organization: String = null </p>
-          <p> Platform(s): String = null </p>
-          <p> Version: ?? </p>
-          <p> Price: Double 0.0 </p>
-          <p> Description: String = null </p>
+          <h3></h3>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
         </div>
 
         <div class="appCard">
           <img src="img/result1.png" class="appCardImage"/>
-          <h3> App Name </h3>
-          <p> Organization: String = null </p>
-          <p> Platform(s): String = null </p>
-          <p> Version: ?? </p>
-          <p> Price: Double 0.0 </p>
-          <p> Description: String = null </p>
+          <h3></h3>
+          <p></p>
+          <p> </p>
+          <p></p>
+          <p></p>
+          <p></p>
         </div>
       </div>
         
@@ -504,3 +564,15 @@
       </script>
     </body>
 </html>
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

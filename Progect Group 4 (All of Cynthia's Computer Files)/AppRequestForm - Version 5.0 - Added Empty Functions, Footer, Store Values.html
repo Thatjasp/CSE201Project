@@ -4,15 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title> AppPage - Version 3.0 - Log-in Added </title>
+    <title> AppRequestForm - Version 5.0 - Added Empty Functions, Footer, Store Values </title>
     <style>
-
       body{
         background-color: #343434;
         color: white;
       }
 
-        /* START OF TOP NAV */
+      /* START OF TOP NAV */
 
       /* Add a black background color to the top navigation bar */
       .topnav {
@@ -337,27 +336,74 @@
       .toForm a{
         color: aliceblue;
       }
+      
+      .submit-button:hover{
+        background-color: #3795E5;
+      }
 
       /* END OF FILTERS */
+      
 
-      .appInfo{
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
+      h1{
         text-align: center;
       }
 
-      .appImage{
-        padding-left: 25%;
-        padding-right: 25%;
+      section{
+        border-radius: 5px;
+        background-color: #575757;
+        padding: 20px;
+        margin-left: 50px;
+        margin-right: 50px;
       }
+      fieldset{
+        border: 0px;
+      }
+      .form input{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0px;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .formEnterBtn{
+        background-color: #3ea6ff;
+        color: white;
+        font-size: 14px;
+        padding: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
 
-      .commentSection{
-        margin-left: auto;
-        margin-right: auto;
-        width: 75%;
+
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-bottom-left-radius:5px;
+        -webkit-border-bottom-right-radius:5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-topright: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
       }
+      .formEnterBtn:hover{
+        background-color: #3795E5;
+      }
+			
+			/* -- START OF THE FOOTER --*/
+			.footer{
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				color: white;
+				text-align: center;
+				margin-top: 40px;
+				padding: 10px 0px 10px 0px;
+			}
+			/* -- END OF THE FOOTER -- */
 
     </style>
   </head>
@@ -448,38 +494,58 @@
       <p> Can't find what you are looking for? <a href="AppRequestForm.html"> Add it! </a> </p>
     </div>
 
-    <br>
-    <br>
+    <!-- Form for users to request apps to be added to the collection -->
+    <div class="form">
+      <h1> App Request Form </h1>
+      <section>
+        <form name="appRequestForm" action="ThankYou.html" onSubmit="" method="POST" autocomplete="off">
 
-    <div class="appInfo">
-      <h1> App Title </h1>
-      <div>
-        <img class="appImage" src="img/BluBerry Pi.png" >
-        <h5> Price: Double 0.0 </h5>
-      </div>
-      <div>
-        <p> Organization: String = null <br> Platform(s): String[ ] <br> Version: ?? </p>
-        <p> Description </p>
-      </div>
+          <fieldset name="appRquestForm" id="appRequestForm">
+            <label for="username"> Username (required): </label>
+            <input type="text" name="username" id="username" placeholder="Name of User" onChange="storeInformation(this)" required/>
+            <br>
+
+            <label for="appLink"> Link to the origanl app store (required): </label>
+            <input type="text" name="appLink" id="appLink" placeholder="Link" onChange="storeInformation(this)" required/>
+            <br>
+
+            <label for="appName"> Name of app (optional): </label>
+            <input type="text" name="appName" id="appName" placeholder="Name" onChange="storeInformation(this)"/>
+            <br>
+
+            <label for="appPrice"> Price of app (optional): </label>
+            <input type="text" name="appPrice" id="appPrice" placeholder="0.99" onChange="storeInformation(this)"/>
+            <br>
+
+            <label for="platforms"> Platform(s) (optional): </label>
+            <input type="text" name="platforms" id="platforms" placeholder="Platform name(s)" onChange="storeInformation(this)"/>
+            <br>
+
+            <label for="appVersion"> Current Version (optional): </label>
+            <input type="text" name="appVersion" id="appVersion" placeholder="Current Version Number" onChange="storeInformation(this)"/>
+            <br>
+
+            <label for="appDescription"> Current Description on App Store (optional): </label>
+            <input type="text" name="appDescription" id="appDescription" placeholder="Current Description" onChange="storeInformation(this)"/>
+            <br>
+
+          </fieldset>
+
+          <button class="formEnterBtn"> Enter </button>
+
+        </form>
+      </section>
     </div>
-    <br>
-    <br>
+		
+		<!-- START OF FOOTER 	-->
+		<div class="footer">
+			<p> *This was made as a CSE 201 Into to Software Engineering project* </p>
+			<p> By Jose Salinas, Cynthia Sheard, and Dane Federighi</p>
+		</div>
+		<!-- END OF FOOTER -->
 
-    <div class="commentSection">
-      <!-- begin wwww.htmlcommentbox.com -->
-      <div id="HCB_comment_box">
-        <a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...
-      </div>
-      <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
-
-     <script type="text/javascript" id="hcb">
-       /*<!--*/ 
-       if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%24RqCOnEz64DSHJv4uWcDnM."+"&opts=16862&num=10&ts=1602096489953");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ 
-      </script>
-      <!-- end www.htmlcommentbox.com -->
-    </div>
-    
     <script>
+      
       // Get the modal
       var modal = document.getElementById('id01');
 
@@ -489,6 +555,92 @@
               modal.style.display = "none";
           }
       }
+			
+			// ---------------------
+			
+			// Set default values
+      let request = {
+        requestUsername: "",
+        requestAppLink: "",
+        requestAppName: "",
+        requestAppPrice: 0.0,
+        requestPlatforms: "",
+        requestAppVersion: "",
+        requestAppDescription: ""
+      }
+			
+			// Create storeInformation() Function
+			function storeInformation(changedVariable){
+				if (changedVariable == username){
+					request.requestUsername = changedVariable.value;
+				}
+				else if (changedVariable == appLink){
+					request.requestAppLink = changedVariable.value;
+				}
+				else if (changedVariable == appName){
+					request.requestAppName = changedVariable.value;
+				}
+				else if (changedVariable == appPrice){
+					request.requestAppPrice = changedVariable.value;
+				}
+				else if (changedVariable == platforms){
+					request.requestPlatforms = changedVariable.value;
+				}
+				else if (changedVariable == appVersion){
+					request.requestAppVersion = changedVariable.value;
+				}
+				else if (changedVariable == appDescription){
+					request.requestAppDescription = changedVariable.value;
+				}
+				else {
+					console.log("This text field variable shouldn't exist. How did you manage to do that?")
+				}
+				
+				
+				console.log(request);
+			}
+			
+			
+			// ---------------------
+			
+			
+/*      
+      // Boolean Variables
+      let isLoggedIn;
+      let isModerator;
+      let isAdmin;
+      
+      function verifyLogIn(){
+        // Verify Logged-In
+        if (){
+          is LoggedIn = true;
+          
+          // Check if they are a moderator
+          if (){
+            isModerator = true;
+          }
+          
+          // Check if they are an admin
+          else if (){
+             isAdmin = true;
+          }
+					
+					else{
+					  
+					}
+        }
+			  
+				// Check not logged-in
+				else if (){
+				  
+				}
+				
+				// Check for error
+				else{
+					
+				}
+      }	// End of function()*/
+
     </script>
 
   </body>
