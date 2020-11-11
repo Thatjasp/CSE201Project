@@ -688,6 +688,7 @@
             deleteForm(obj._id);
             }
             catch{console.log("PROBLEM ADDING APP")}
+            location.reload();
           }
         async function denyForm(id){
           var num = parseInt(id);
@@ -695,6 +696,7 @@
           var appObj = formToApp(obj);
           try{
             deleteForm(obj.id);
+            location.reload();
           }
           catch{console.log("PROBLEM ADDING APP")}
         }
@@ -711,7 +713,6 @@
       }).catch((err) => {
           return null;
       });
-      location.reload();
     }
 
     function formToApp(obj){
