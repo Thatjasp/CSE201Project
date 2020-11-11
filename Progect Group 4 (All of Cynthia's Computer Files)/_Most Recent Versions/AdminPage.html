@@ -695,7 +695,7 @@
           var obj = forms[num];
           console.log(obj);
           try{
-            await deleteForm(obj.id);
+            deleteForm(obj._id);
             location.reload();
           }
           catch{console.log("PROBLEM ADDING APP")}
