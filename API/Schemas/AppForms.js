@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
+const deflt = 0;
 
 const Schema = mongoose.Schema;
 
@@ -23,7 +24,7 @@ module.exports.appSchema = new Schema({
 
 module.exports.appJoi = Joi.object({
     _id: Joi.string().required(),
-    nameApp: Joi.string().allow('').optional(),
+    nameApp: Joi.string().empty('').default('Default 1').optional(),
     description: Joi.string().allow('').optional(),
     organization: Joi.string().allow('').optional(),
     platforms: Joi.array().empty(['']).default([]).items(Joi.string().allow('').optional()),

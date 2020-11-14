@@ -4,10 +4,12 @@ const Joi = require('Joi');
 const router = express.Router();
 const _ = require('underscore');
 const schemas = require('../Schemas/App')
+const session = require('express-session')
 
 const appInfo = schemas.appSchema;
 const appSchema = schemas.appJoi;
 const appModel = mongoose.model('App', appInfo);
+
 
 router.get('/getApps', async (req, res) => {
 

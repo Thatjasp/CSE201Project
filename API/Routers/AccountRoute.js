@@ -4,7 +4,6 @@ const Joi = require('Joi');
 const router = express.Router();
 const _ = require('underscore');
 const schemas = require('../Schemas/Account')
-
 const Account = schemas.accountSchema;
 const accountJoi = schemas.joiAccount;
 const accountModel = mongoose.model('Account', Account);
@@ -20,7 +19,6 @@ router.get('/Users', async (req, res) => {
         }
     });
 });
-
 router.get('/User/:id', async (req, res) => {
     await accountModel.findById(req.params.id, (err,obj) => {
         if(err){

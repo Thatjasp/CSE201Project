@@ -17,8 +17,8 @@ export async function getAccounts() {
     });
 }
 
-export async function getAccountByEmail(email) {
-    return await fetch(`${url}/Accounts/Users/${email}`).then((response) => {
+export async function getAccountByUser(user) {
+    return await fetch(`${url}/Accounts/Users/${user}`).then((response) => {
         try{
             return response.json();
         }
@@ -33,7 +33,7 @@ export async function getAccountByEmail(email) {
 
 
 */
-export async function postForm(obj){
+export async function postAccount(obj){
     return await fetch(url+'/Accounts/NewUser',{
         method: 'POST',
         headers: {
@@ -52,7 +52,7 @@ export async function postForm(obj){
     });
 }
 
-export async function updateForm(name,obj){
+export async function updateAccount(name,obj){
     return await fetch(`${url}/Accounts/User/${name}`,{
         method:'PUT',
         headers: {
