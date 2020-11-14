@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title> AdminPage - Version 6.0 - Added Footer, Now Stores Updated Variables </title>
+    <title> AdminPage - Version 7.0 - Request Data is There on Load </title>
     <style>
 
       body{
@@ -438,7 +438,7 @@
     </style>
   </head>
 
-  <body>
+  <body onload="appRequestInfo(request)">
 
     <div class="topnav">
       <a id="logo" href="index.html"> <img href="AppPage.html" src="img/BluBerry Pi.png" height="44px" width="62px"> </a>
@@ -529,7 +529,7 @@
       <h1 id="queueTitle"> Current Pending Queue </h1>
       <div class="pendingApps">
         <section>
-          <form method="POST" onsubmit="return(storeInformation())" target="_blank" action="ThankYou - Version 1.0 - Just Centered Text.html" autocomplete="off">
+          <form method="POST" onsubmit="return(storeInformation())" target="_blank" action="" autocomplete="off">
             
             <button class="approve"> <i class="fa fa-check"></i> </button>
             <button class="deny"> <i class="fa fa-remove"></i> </button>
@@ -537,31 +537,31 @@
             
             <fieldset name="appRquestForm" id="appRequestForm">
               <label for="username"> Username: </label>
-              <input type="text" name="username" id="username" value="requestUsername" onChange="storeInformation(this)" required/>
+              <input type="text" name="username" id="username" onChange="storeInformation(this)" required/>
               <br>
 
               <label for="appLink"> Link to the origanl app store: </label>
-              <input type="text" name="appLink" id="appLink" value="requestAppLink" onChange="storeInformation(this)" required/>
+              <input type="text" name="appLink" id="appLink" onChange="storeInformation(this)" required/>
               <br>
 
               <label for="appName"> Name of app: </label>
-              <input type="text" name="appName" id="appName" value="requestAppName" onChange="storeInformation(this)" required/>
+              <input type="text" name="appName" id="appName" onChange="storeInformation(this)" required/>
               <br>
 
               <label for="appPrice"> Price of app: </label>
-              <input type="text" name="appPrice" id="appPrice" value="requestAppPrice" onChange="storeInformation(this)" required/>
+              <input type="text" name="appPrice" id="appPrice" onChange="storeInformation(this)" required/>
               <br>
 
               <label for="platforms"> Platform(s): </label>
-              <input type="text" name="platforms" id="platforms" value="requestPlatforms" onChange="storeInformation(this)" required/>
+              <input type="text" name="platforms" id="platforms" onChange="storeInformation(this)" required/>
               <br>
 
               <label for="appVersion"> Current Version: </label>
-              <input type="text" name="appVersion" id="appVersion" value="requestVersion" onChange="storeInformation(this)" required/>
+              <input type="text" name="appVersion" id="appVersion" onChange="storeInformation(this)" required/>
               <br>
 
               <label for="appDescription"> Current Description on App Store: </label>
-              <input type="text" name="appDescription" id="appDescription" value=[appDescription] onChange="storeInformation(this)" required/>
+              <input type="text" name="appDescription" id="appDescription" onChange="storeInformation(this)" required/>
               <br>
             </fieldset>
 
@@ -597,6 +597,17 @@
 			
 			//---------------------
 			
+			// Until I can get the real request object
+      let request = {
+        requestUsername: "this",
+        requestAppLink: "is",
+        requestAppName: "a",
+        requestAppPrice: 0.07,
+        requestPlatforms: "test",
+        requestAppVersion: "",
+        requestAppDescription: ""
+      }
+			
 			// Set default values
 			let appInfo = {
         username: "",
@@ -617,7 +628,19 @@
 				appInfo.platforms = request.requestPlatforms;
 				appInfo.appVersion = request.requestAppVersion;
 				appInfo.appDescription = request.requestAppDescription;
+				
+				// Set the values of all the text fields
+				document.getElementById("username").value = request.requestUsername;
+				document.getElementById("appLink").value = request.requestAppLink;
+				document.getElementById("appName").value = request.requestAppName;
+				document.getElementById("appPrice").value = request.requestAppPrice;
+				document.getElementById("platforms").value = request.requestPlatforms;
+				document.getElementById("appVersion").value = request.requestAppVersion;
+				document.getElementById("appDescription").value = request.requestAppDescription;
 			}
+			
+			
+			
 			
 			// Create storeInformation() Function
 			function storeInformation(changedVariable){
