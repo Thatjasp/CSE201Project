@@ -714,8 +714,11 @@
           return null;
       });
     }
-
+    var i = 0;
     function formToApp(obj){
+      if(obj.nameApp == ""){
+        obj.nameApp = i++;
+      }
       var newObj = {
         _id:obj.nameApp,
         description: obj.description,
