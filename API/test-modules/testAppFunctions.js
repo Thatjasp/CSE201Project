@@ -68,8 +68,21 @@ async function updateApp(name, obj) {
         return null;
     });
 }
-
+async function deleteApp(name) {
+        return await fetch(url + '/Apps/deleteApp/' + name,{
+          method:'DELETE'
+        }).then((response) => {
+          try {
+              return response.json();
+          } catch {
+              return response;
+          }
+      }).catch((err) => {
+          return null;
+      });
+    }
 module.exports.getApps = getApps;
 module.exports.getApp = getApp;
 module.exports.postApps = postApps;
-module.exports.updateApp = updateApp;
+module.exports.updateApp = updateApp;           
+module.exports.deleteApp = deleteApp;

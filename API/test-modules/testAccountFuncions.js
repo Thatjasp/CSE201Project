@@ -1,12 +1,26 @@
 const fetch = require('node-fetch');
-const url = 'http://localhost:8080';
+const url = 'http://localhost:8080'
+
 
 /*
     This method retrieves an array of App objects
     without filtering
 */
-async function getForms() {
-    return await fetch(url + '/AppForms/getForms').then((response) => {
+async function getAccounts() {
+    return await fetch(url + '/Accounts/Users').then((response) => {
+        try{
+            return response.json();
+        }
+        catch{
+            return response;
+        }
+    }).catch((err) => {
+        return null;
+    });
+}
+
+async function getAccountByUser(user) {
+    return await fetch(`${url}/Accounts/User/${user}`).then((response) => {
         try{
             return response.json();
         }
@@ -21,19 +35,8 @@ async function getForms() {
 
 
 */
-async function getForm(name) {
-    return await fetch(url + '/AppForms/getForm/' + name).then((response) => {
-        try {
-            return response.json();
-        } catch {
-            return response;
-        }
-    }).catch((err) => {
-        return null;
-    });
-}
-async function postForm(obj){
-    return await fetch(url+'/AppForms/sendForms',{
+async function postAccount(obj){
+    return await fetch(url+'/Accounts/NewUser',{
         method: 'POST',
         headers: {
             'Content-Type':'application/json'
@@ -51,8 +54,8 @@ async function postForm(obj){
     });
 }
 
-async function updateForm(name,obj){
-    return await fetch(`${url}/AppForms/sendForms/${name}`,{
+async function updateAccount(name,obj){
+    return await fetch(`${url}/Accounts/updateUser/${name}`,{
         method:'PUT',
         headers: {
             'Content-Type':'application/json'
@@ -69,8 +72,9 @@ async function updateForm(name,obj){
         return null;
     });
 }
-async function deleteForm(name) {
-        return await fetch(url + '/AppForms/deleteForm/' + name,{
+
+async function deleteAccount(name) {
+        return await fetch(url + '/Accounts/deleteAccount/' + name,{
           method:'DELETE'
         }).then((response) => {
           try {
@@ -82,8 +86,9 @@ async function deleteForm(name) {
           return null;
       });
     }
-module.exports.getForm = getForm;
-module.exports.getForms = getForms;
-module.exports.updateForm = updateForm;
-module.exports.postForm = postForm;
-module.exports.deleteForm = deleteForm;
+
+module.exports.getAccounts = getAccounts;
+module.exports.getAccountByUser = getAccountByUser;
+module.exports.postAccount = postAccount;
+module.exports.updateAccount = updateAccount;
+module.exports.deleteAccount = deleteAccount;

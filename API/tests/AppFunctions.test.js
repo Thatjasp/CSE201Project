@@ -33,7 +33,14 @@ test('Basic updateApp function test', async () => {
     let updates = {
         description:"Another Test"
     }
-    appFunctions.updateApp("Test",updates);
+    await appFunctions.updateApp("Test",updates);
     const app = await appFunctions.getApp('Test');
     expect(app.description).toEqual("Another Test");
+});
+test('Deleting App From Database', async () => {
+    var id = 'Test';
+    await appFunctions.deleteApp(id);
+    var obj = await appFunctions.getApp(id);
+    expect(_.isObject(obj)).toBeFalsy();
+    
 });

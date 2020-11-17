@@ -685,11 +685,10 @@
         let appDescription = document.getElementById("appDescription").value;
         let appOrganization = document.getElementById("appOrganization").value;
         
-        console.log(typeof(appName));
-        if (appPrice != "")
-          appPrice = parseInt(price);
-        else
+        appPrice = parseFloat(appPrice);
+        if(isNaN(appPrice)){
           appPrice = 0;
+        }
         // app request form object
         let request = {
           _id: username,

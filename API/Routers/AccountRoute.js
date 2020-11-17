@@ -60,9 +60,16 @@ router.put('/updateUser/:id', async (req, res) => {
         }
     });
 });
-
+router.delete('/deleteAccount/:id', async (req,res) => {
+    accountModel.findByIdAndRemove(req.params.id,(err,obj) => {
+        if(err)
+            return res.status(500).send("Error Deleting Object");
+        else
+            return res.send('Deleted Sucessfully');
+    });
+});
 function validateJSON(body) {
-    if(_.isEmpty()){
+    if(!_.isObject(body)){
         return null;
     }
     return body;

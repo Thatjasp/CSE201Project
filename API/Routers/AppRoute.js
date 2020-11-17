@@ -10,6 +10,7 @@ const appInfo = schemas.appSchema;
 const appSchema = schemas.appJoi;
 const appModel = mongoose.model('App', appInfo);
 
+var numDefault = 0;
 
 router.get('/getApps', async (req, res) => {
 
@@ -69,7 +70,20 @@ router.put('/sendApps/:id', async (req, res) => {
     });
 
 });
-
+router.delete('/deleteApp/:id', async (req,res) => {
+    appModel.findByIdAndRemove(req.params.id,(err,obj) => {
+        if(err)
+            return res.status(500).send("Error Deleting Object");
+        else
+            return res.send('Deleted Sucessfully');
+    });
+});
+function validateJSON(body) {
+    if(_.isEmpty(body)){
+        return null;
+    }
+    return body;
+}
 function validateJSON(body) {
     if(_.isEmpty(body)){
         return null;

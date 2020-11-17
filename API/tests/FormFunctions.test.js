@@ -9,11 +9,6 @@ test('Retrieves test form from datase', async () => {
         
 });
 
-test('Gets form information by name', async () => {
-    const data = await formFunctions.getForm('String');
-    expect(_.isObject(data)).toBeTruthy();
-});
-
 test('Posts app onto the form collection', async () => {
     let app = {
         _id: "Bob'sApp",
@@ -30,12 +25,23 @@ test('Posts app onto the form collection', async () => {
     expect(_.isObject(data)).toBeTruthy();
 });
 
+test('Gets form information by name', async () => {
+    const data = await formFunctions.getForm("Bob'sApp");
+    expect(_.isObject(data)).toBeTruthy();
+});
+
 test('Basic update form function test', async () => {
     let updates = {
         description: "Oooga Booga Booga"
     }
-
-    await formFunctions.updateForm("String",updates);
-    const data = await formFunctions.getForm("String");
+    var id = "Bob'sApp"
+    await formFunctions.updateForm(id,updates);
+    const data = await formFunctions.getForm(id);
     expect(data.description).toEqual("Oooga Booga Booga");
+});
+test('Delete App Forms from data base', async() => {
+    var id = "Bob'sApp";
+    await formFunctions.deleteForm(id);
+    var obj = await formFunctions.getForm(id);
+    expect(_.isObject(obj)).toBeFalsy();
 });

@@ -31,11 +31,15 @@ router.get('/getForm/:id', async (req, res) => {
         }
     });
 });
-
+var num= 0;
 router.post('/sendForms', async (req,res) => {
     let {error} = appSchema.validate(req.body);
     if (error){
         return res.status(400).send(error.details[0]);
+    }
+    var obj = req.body;
+    if(req.body.nameApp == ""){
+        obj.nameApp = num++;
     }
     await formModel.create(req.body,(error,obj) => {
         if (error){
