@@ -489,8 +489,6 @@
     <div id="id01" class="modal">
       <form
         class="modal-content animate"
-        action="/action_page.php"
-        method="post"
       >
         <div class="imgcontainer">
           <span
@@ -508,6 +506,7 @@
             type="text"
             placeholder="Enter Username"
             name="uname"
+            id="user"
             required
           />
 
@@ -516,10 +515,11 @@
             type="password"
             placeholder="Enter Password"
             name="psw"
+            id="pass"
             required
           />
 
-          <button class="loginButton" type="submit">Login</button>
+          <button class="loginButton" type="submit" onclick="login()">Login</button>
           <label>
             <input type="checkbox" checked="checked" name="remember" /> Remember
             me
@@ -730,6 +730,19 @@
       }
       return newObj;
     }
+    function login() {
+        var user = document.getElementById(user).innerText;
+        var pass = document.getElementById(pass).innerText;
+        fetch(`${url}/UserSession/${user}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            "pass":pass
+          }),
+        });
+      }
         async function postApps(obj) {
           return await fetch(url + "/Apps/sendApps", {
             method: "POST",

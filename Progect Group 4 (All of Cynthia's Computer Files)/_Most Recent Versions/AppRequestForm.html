@@ -457,8 +457,6 @@
     <div id="id01" class="modal">
       <form
         class="modal-content animate"
-        action="/action_page.php"
-        method="post"
       >
         <div class="imgcontainer">
           <span
@@ -476,6 +474,7 @@
             type="text"
             placeholder="Enter Username"
             name="uname"
+            id="user"
             required
           />
 
@@ -484,10 +483,11 @@
             type="password"
             placeholder="Enter Password"
             name="psw"
+            id="pass"
             required
           />
 
-          <button class="loginButton" type="submit">Login</button>
+          <button class="loginButton" type="submit" onclick="login()">Login</button>
           <label>
             <input type="checkbox" checked="checked" name="remember" /> Remember
             me
@@ -703,7 +703,19 @@
         };
         await postForm(request)
       }
-        
+      function login() {
+        var user = document.getElementById("user").value;
+        var pass = document.getElementById("pass").value;
+        fetch(`${url}/UserSession/${user}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            "pass":pass
+          }),
+        });
+      }
       /*      
       // Boolean Variables
       let isLoggedIn;

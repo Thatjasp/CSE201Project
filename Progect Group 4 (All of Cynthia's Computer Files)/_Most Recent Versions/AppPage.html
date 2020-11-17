@@ -168,7 +168,13 @@
         float: right;
         padding-top: 16px;
       }
+      h3{
 
+        font-family: Helvetica;
+      }
+      h1 {
+        font-family: Helvetica;
+      }
       /* The Modal (background) */
       .modal {
         display: none; /* Hidden by default */
@@ -380,8 +386,7 @@
 
   <body>
     <div class="topnav">
-<<<<<<< HEAD
-      <a id="logo" href="MetaAppIndex.html">
+      <a id="logo" href="/">
         <img
           href="AppPage.html"
           src="img/BluBerry Pi.png"
@@ -389,9 +394,6 @@
           width="62px"
         />
       </a>
-=======
-      <a id="logo" href="index.html"> <img href="AppPage.html" src="img/BluBerry Pi.png" height="44px" width="62px"> </a>
->>>>>>> e6229ff4634961e03132be248a484352637d6e5f
       <div class="search-container">
         <form>
           <input type="text" placeholder="Search.." />
@@ -415,11 +417,7 @@
     </div>
 
     <div id="id01" class="modal">
-      <form
-        class="modal-content animate"
-        action="/action_page.php"
-        method="post"
-      >
+      <form class="modal-content animate">
         <div class="imgcontainer">
           <span
             onclick="document.getElementById('id01').style.display='none'"
@@ -449,14 +447,11 @@
             required
           />
 
-          <button class="loginButton" type="submit">Login</button>
+          <button class="loginButton" type="submit" onclick="login()">
+            Login
+          </button>
           <label>
-            <input
-              type="checkbox"
-              checked="checked"
-              name="remember"
-              onclick="login()"
-            />
+            <input type="checkbox" checked="checked" name="remember" />
             Remember me
           </label>
         </div>
@@ -523,20 +518,7 @@
     <br />
     <br />
 
-    <div class="appInfo">
-      <h1>App Title</h1>
-      <div>
-        <img class="appImage" src="img/BluBerry Pi.png" />
-        <h5>Price: Double 0.0</h5>
-      </div>
-      <div>
-        <p>
-          Organization: String = null <br />
-          Platform(s): String[ ] <br />
-          Version: ??
-        </p>
-        <p>Description</p>
-      </div>
+    <div class="appInfo" id="App">
     </div>
     <br />
     <br />
@@ -583,8 +565,49 @@
       // Get the modal
       var modal = document.getElementById("id01");
 
-      window.onload(async () => {});
+      var id = window.location.href.split('name=')[1];
+      id = id.replace('%20',' ');
+      window.onload = async () => {
+        var app = await getApp(id);
+        id = app._id;
+        var div = document.getElementById("App");
+        var title = document.createElement("h1");
+        title.innerHTML = app._id;
+        var price = document.createElement("h3");
+        if(app.price == 0)
+          app.price = 'Free';
+        price.innerHTML = "Price: " + app.price
+        var org = document.createElement("h3");
+        org.innerHTML = "Organization: "+ app.organization
+        var platform = document.createElement("h3");
+        platform.innerHTML = "Platforms: "
+        for (var i = 0; i < app.platforms.length; i++){
+          platform.innerHTML += app.platforms[i] + " ";
+        }
+        var version = document.createElement("h3");
+        version.innerHTML = "Version: " + app.versions;
+        var description = document.createElement("h3");
+        description.innerHTML = app.description;
 
+        var arr = [title,price,org,platform,version,description];
+
+        for(var i = 0; i < arr.length; i++){
+          div.appendChild(arr[i]);
+        }
+      };
+      async function getApp(name) {
+        return await fetch(url + "/Apps/getApp/" + name)
+          .then((response) => {
+            try {
+              return response.json();
+            } catch {
+              return response;
+            }
+          })
+          .catch((err) => {
+            return null;
+          });
+      }
       // When the user clicks anywhere outside of the modal, close it
       window.onclick = function (event) {
         if (event.target == modal) {
@@ -592,18 +615,19 @@
         }
       };
 
-      function login() {
-        var user = document.getElementById(user).innerText;
-        var pass = document.getElementById(pass).innerText;
-        fetch(`${url}/UserSession/${user}`, {
+      async function login() {
+        var user = document.getElementById("user").value;
+        var pass = document.getElementById("pass").value;
+        await fetch(`${url}/UserSession/${user}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            "pass":pass
+          body:JSON.stringify({
+            "pass": pass
           }),
         });
+        winodw.location.replace(`${url}/AppPage?name=${id}`);
       }
     </script>
   </body>

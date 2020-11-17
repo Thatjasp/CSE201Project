@@ -62,7 +62,7 @@ site.get('/AppRequestForm.html', (req,res) => {
     }
 });
 
-site.get('/AppPage/:id', (req,res) => {
+site.get('/AppPage', (req,res) => {
     res.sendFile(siteUrl + "/AppPage.html");
 });
 

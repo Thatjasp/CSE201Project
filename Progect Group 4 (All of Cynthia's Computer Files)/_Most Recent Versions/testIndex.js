@@ -16,6 +16,8 @@ function putInfoCards(data){
         
         for (var i = 0; i < data.length; i++ ) {
             var div = createDiv();
+            div.setAttribute('onclick',`location.href='http://localhost:8080/AppPage?name=${data[jsonIndex]._id}';`);
+            div.setAttribute('style','cursor: pointer;');
             var children = div.children;
             clearAndAddText(children[0],data[jsonIndex]._id);
             clearAndAddText(children[1],data[jsonIndex].organization);
