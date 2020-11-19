@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-server": "node API.js",
+    "start-server": "npm i && node API.js",
     "test": "jest",
     "ci": "start-server-and-test start-server http://localhost:8080 test"
   },
