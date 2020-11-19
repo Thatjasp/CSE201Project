@@ -702,6 +702,7 @@
         };
         await postForm(request)
       }
+      var url = "http://localhost:8080";
       function login() {
         var user = document.getElementById("user").value;
         var pass = document.getElementById("pass").value;
@@ -711,7 +712,7 @@
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            "pass":pass
+            pass:pass
           }),
         });
       }

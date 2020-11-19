@@ -69,6 +69,9 @@ site.get('/AppPage', (req,res) => {
 site.get('/',(req,res) => {
     res.sendFile(path.resolve('../Progect Group 4 (All Of Cynthia\'s Computer Files)/_Most Recent Versions/MetaAppIndex.html'));
 });
+site.get('/help_page.html', (req,res) => {
+    res.sendFile(path.resolve('../Progect Group 4 (All Of Cynthia\'s Computer Files)/_Most Recent Versions/help_page.html'))
+});
 site.post('/UserSession/:id', async (req,res) => {
     var obj = await fetch(`http://localhost:8080/Accounts/User/${req.params.id}`).then(response => {
         return response.json();
