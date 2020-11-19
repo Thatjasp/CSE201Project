@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    .topnav{
+        float: left;
+    }
+    h1{
+        text-align: center;
+        color: lightskyblue;
+    }
+
+    h2{
+        color: navy;
+    }
+
+    body{
+        background-color: #343434;
+        color: white;
+        text-align: center;
+    }
+
+    textarea{
+        border-color: #343434;
+        font-size: medium;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+</style>
+
+<a class="topnav" id="logo" href="/"> <img href="AppPage.html" src="img/BluBerry Pi.png" height="44px" width="62px"></a>
+<head>
+    
+    <h1>FAQ</h1>
+</head>
+<hr>
+
+<body>
+     <div>
+            <h2> How do I add my own app?</h2>
+                <textarea class="question" name="answer" id="answer" cols="30" rows="8">
+There is a button on the homepage that says app request form, click that and it will direct you to an app request page. Fill that out and submit it and the admin will accept or deny your request.
+                </textarea>
+
+            <h2> How can I comment on an app?</h2>
+                <textarea class="question" name="answer" id="answer" cols="30" rows="11">
+You can only comment if you are a logged in user. If you aren't or don't have an account go to the login/register page and create an account then login. After that you can click on the app that you want to comment on, scroll down to the comments section, type out your comment, then submit it.
+                </textarea>
+    
+            <h2> What do these app boxes mean?</h2>
+        <textarea class="question" name="answer" id="answer" cols="30" rows="15">
+Each app box represents a different app that was created or submitted. It will give you small details right off the bat such as price, title, app picture, etc. If you click on the app it will redirect you to an individual app page that will go more indepth about the app giving you a description as well as a comments section to either type your own comment and or read comments others have left about the app
+        </textarea>
+
+            <h2>How do I navigate the page as a user?</h2>
+        <textarea class="question" name="answer" id="answer" cols="30" rows="9">
+As a user you have a plethora of things you can do. You can request an app via the app request form, you can read/make comments on apps via their individual app pages, you can search/ filter apps, and you can download apps.
+        </textarea>
+        </div>
+        
+
+</div>
+<div>
+        <br><br><br><h2>Ask a Question</h2>
+        <form action="/help_page/id/answer" method="POST">
+            <textarea id = "ask"name="answers" id="answers" cols="30" rows="10"></textarea>
+            <br>
+            <button type = "submit">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>
