@@ -17,7 +17,7 @@ test('Deleting form (Admin denying form)', async() => {
     await formFunctions.postForm(app);
     expect(_.isObject(await formFunctions.getForm(app._id)));
     await formFunctions.deleteForm(app._id);
-
+    expect(_.isObject(await formFunctions.getForm(app._id))).toBeFalsy();
 });
 
 test('User Sending Request', async() => {
